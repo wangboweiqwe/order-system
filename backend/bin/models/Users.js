@@ -1,7 +1,11 @@
-const { Schema } = require("mongoose")
+const mongoose = require('mongoose');
+const { Schema } = require("mongoose");
 
-const Users = new Schema({
+const UsersSchema = new Schema({
     name: {
+        type: String
+    },
+    hashedPassword: {
         type: String
     },
     telephone: {
@@ -10,10 +14,17 @@ const Users = new Schema({
     address: {
         type: String
     },
+    // role 0 管理员。 role 1 客户。
+    role: {
+        type: Number
+    },
     orders:[{
         _id: {
             type: Schema.Types.ObjectId
         }
     }]
 })
+
+const Users = mongoose.model('Users', UsersSchema);
+
 module.exports = Users;

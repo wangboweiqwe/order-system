@@ -3,10 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const mongodb = require('./bin/mongodb');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+
+global.salt = 'hcat';
+global.mongoUrl = 'mongodb://staticPath:build1472@localhost/infoEntry?authSource=admin';
 
 mongodb();
 
@@ -23,8 +30,17 @@ app.use(cookieParser());
 // 静态文件
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
 
+app.use(session({
+  secret: 'hcat',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: global.mongoUrl })
+}));
+app.use(passport.authenticate('session'));
+
+app.use('/auth', authRouter);
 app.use('/users', usersRouter);
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

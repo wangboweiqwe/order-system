@@ -4,7 +4,7 @@ const Users = require('./models/Users');
 const Orders = require('./models/Orders');
 
 module.exports = () => {
-    mongoose.connect('mongodb://staticPath:build1472@localhost/infoEntry?authSource=admin');
+    mongoose.connect(global.mongoUrl);
     mongoose.connection.on('connected', function () {
         console.log('Mongoose connection open');
     });
