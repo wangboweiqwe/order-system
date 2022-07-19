@@ -1,6 +1,7 @@
+const mongoose = require('mongoose');
 const { Schema } = require("mongoose");
 
-const Orders = Schema({
+const OrdersSchema = Schema({
     type: {
         type: Number
     },
@@ -13,4 +14,5 @@ const Orders = Schema({
         }
     }
 })
+const Orders = mongoose.model('Orders', OrdersSchema);
 module.exports = Orders;
