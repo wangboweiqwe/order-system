@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.scss';
-import App from './components/App';
+import FrontPage from './components/FrontPage';
+import Login from './components/Login/Login';
+import OrderList from './components/OrderList/OrderList';
+import AddOrder from './components/AddOrder/AddOrder';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -12,8 +15,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}></Route>
-        {/* <Route path="login" element={<Login />}</Routes> */}
+        <Route path="/" element={<FrontPage />}>
+          <Route path='order-list' element={<OrderList />}></Route>
+          <Route path='add-order' element={<AddOrder />}></Route>
+        </Route>
+        <Route path="login" element={<Login />}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

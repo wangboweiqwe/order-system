@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 const { Schema } = require("mongoose");
 
 const OrdersSchema = Schema({
-    type: {
-        type: Number
-    },
-    amount: {
-        type: Number
-    },
+    goods: [{
+        type: {
+            type: String
+        },
+        amount: {
+            type: Number
+        },    
+    }],
     user: {
-        _id: {
-            type: Schema.Types.ObjectId
-        }
+        type: Schema.Types.ObjectId
     }
 })
 const Orders = mongoose.model('Orders', OrdersSchema);

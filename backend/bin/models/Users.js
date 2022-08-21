@@ -16,7 +16,8 @@ const UsersSchema = new Schema({
     },
     // role 0 管理员。 role 1 客户。
     role: {
-        type: Number
+        type: Number,
+        default: 1
     },
     orders:[{
         _id: {

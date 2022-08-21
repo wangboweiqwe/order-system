@@ -13,7 +13,6 @@ passport.use(new LocalStrategy({
     Users.findOne({
         name
     }).exec((err, user) => {
-        console.log(user)
         if (err) return cb(err);
         if (!user) return cb(null, false, { code: -1, message: 'Incorrect username or password.' });
         if (!user.hashedPassword === hashedPassword) {
@@ -35,10 +34,6 @@ passport.deserializeUser(function (_id, cb) {
     });
 });
 
-router.get('/login', (req, res, next) => {
-    res.json({ code: 0 });
-})
-
 router.post('/login', function (req, res, next) {
     passport.authenticate('local', (err, user, info) => {
         if (err) return next(err);
@@ -47,10 +42,28 @@ router.post('/login', function (req, res, next) {
             if (err2) { return next(err2); }
             return res.json({
                 code: 0,
+                user,
                 msg: '登陆成功'
             });
         });
     })(req, res, next);
+});
+
+router.get('/logout', (req, res, next) => {
+    if(!req.user) res.json({
+        // haven't login
+        code: -1
+    });
+    else{
+        req.logout((err) => {
+            if(err) next(err)
+            else{
+                res.json({
+                    code: 0
+                });
+            }
+        });
+    }
 });
 
 module.exports = router;

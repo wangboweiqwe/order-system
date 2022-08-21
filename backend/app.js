@@ -11,6 +11,7 @@ const mongodb = require('./bin/mongodb');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const ordersRouter = require('./routes/orders');
 
 global.salt = 'hcat';
 global.mongoUrl = 'mongodb://staticPath:build1472@localhost/infoEntry?authSource=admin';
@@ -38,8 +39,9 @@ app.use(session({
 }));
 app.use(passport.authenticate('session'));
 
-app.use('/auth', authRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/orders', ordersRouter);
 // app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
