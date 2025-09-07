@@ -9,10 +9,10 @@ export default function XhsbDetail(){
         type: 'xhsb700',
         amount: 1
       })}}>
-        雪花酥饼700g
+        雪花酥饼10个
       </div>
       <div>
-        酥饼5斤
+        雪花酥饼9斤
       </div>
     </div>
   );

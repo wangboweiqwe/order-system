@@ -14,5 +14,6 @@ const OrdersSchema = Schema({
         type: Schema.Types.ObjectId
     }
 })
-const Orders = mongoose.model('Orders', OrdersSchema);
+const Orders = mongoose.model('orders', OrdersSchema);
+
 module.exports = Orders;

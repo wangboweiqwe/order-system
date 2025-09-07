@@ -1,4 +1,22 @@
 .add-order{
+  a{
+    text-decoration: none;
+    color:black;
+  }
   display: flex;
-  justify-content: center;
+  .nav{
+    background-color: #ccc;
+    a{
+      display: block;
+      padding: 10px 0;
+    }
+    a.active{
+      background-color: white;
+    }
+  }
+  img{
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+  }
 }

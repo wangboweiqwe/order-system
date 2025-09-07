@@ -67,18 +67,29 @@ router.get('/id/:id', (req, res, next) => {
 router.put('/self', (req, res, next) => {
   if(req.user){
     let queryJson = {
-      _id: req.user.id
+      _id: req.user.id,
+      hashedPassword: req.body.oldPassword
     }
-    let updateJson = req.body;
-    Users.findByIdAndUpdate(queryJson, updateJson, (err, data) => {
+    Users.findById(queryJson, (err, data) => {
       if(err) next(err);
       else{
-        res.json({
-          code: 0,
-          data
-        });
+        let updateJson = {
+          name: req.body.name,
+          hashedPassword: req.body.newPassword,
+          telephone: req.body.telephone,
+          address: req.body.address
+        };
+        Users.findByIdAndUpdate(queryJson, updateJson, (err, data) => {
+          if(err) next(err);
+          else{
+            res.json({
+              code: 0,
+              data
+            });
+          }
+        });    
       }
-    });
+    })
   }else{
     res.json({
       // 未登录
@@ -87,8 +98,8 @@ router.put('/self', (req, res, next) => {
   }
 })
 
-router.post('/', function(req, res, next) {
-  if(req.body.name && req.body.telephone){
+router.post('/add', function(req, res, next) {
+  if(req.body.name && req.body.telephone && req.hashedPassword && req.address){
     let queryJson = {
       name: req.body.name
     }
@@ -111,6 +122,7 @@ router.post('/', function(req, res, next) {
               msg: '电话号码已经存在'
             });
           }else{
+            req.body.role = 1;
             let userData = new Users(req.body);
             userData.save((err, data) => {
               if(err) return next(err);

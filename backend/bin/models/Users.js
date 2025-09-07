@@ -19,13 +19,8 @@ const UsersSchema = new Schema({
         type: Number,
         default: 1
     },
-    orders:[{
-        _id: {
-            type: Schema.Types.ObjectId
-        }
-    }]
 })
 
-const Users = mongoose.model('Users', UsersSchema);
+const Users = mongoose.model('users', UsersSchema);
 
 module.exports = Users;

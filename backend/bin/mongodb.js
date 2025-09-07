@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 
-const Users = require('./models/Users');
-const Orders = require('./models/Orders');
-
 module.exports = () => {
     mongoose.connect(global.mongoUrl);
     mongoose.connection.on('connected', function () {

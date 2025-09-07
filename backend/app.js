@@ -14,8 +14,7 @@ const authRouter = require('./routes/auth');
 const ordersRouter = require('./routes/orders');
 
 global.salt = 'hcat';
-global.mongoUrl = 'mongodb://staticPath:build1472@localhost/infoEntry?authSource=admin';
-
+global.mongoUrl = 'mongodb://127.0.0.1/orderSystem';
 mongodb();
 
 var app = express();

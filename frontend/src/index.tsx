@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './index.scss';
 import FrontPage from './components/FrontPage';
 import Login from './components/Login/Login';
-import OrderList from './components/OrderList/OrderList';
-import AddOrder from './components/AddOrder/AddOrder';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -14,13 +12,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<FrontPage />}>
-          <Route path='order-list' element={<OrderList />}></Route>
-          <Route path='add-order' element={<AddOrder />}></Route>
+      <Switch>
+        <Route path="/login">
+          <Login />
         </Route>
-        <Route path="login" element={<Login />}></Route>
-      </Routes>
+        <Route path="/">
+          <FrontPage />
+        </Route>
+      </Switch>
     </BrowserRouter>
   </React.StrictMode>
 );
